@@ -16,23 +16,24 @@ class Solution {
   public:
     bool isPalindrome(Node *head) {
         //  code here
-        vector<int> arr;
-        
-        Node* temp=head;
-        
-        while(temp!=NULL){
-            arr.push_back(temp->data);
-            temp=temp->next;
-        }
-        
-        int n=arr.size();
-        
-        for(int i=0;i<n;i++){
-            if(arr[i]!=arr[n-1-i]){
-                return false;
-            }
-        }
-        
-        return true;
+       stack<int> st;
+       Node* temp=head;
+       
+       while(temp!=NULL){
+           st.push(temp->data);
+           temp=temp->next;
+       }
+       
+       temp=head;
+       
+       while(temp!=NULL){
+           if(st.top()!=temp->data){
+               return false;
+           }
+           st.pop();
+           temp=temp->next;
+       }
+       
+       return true;
     }
 };
